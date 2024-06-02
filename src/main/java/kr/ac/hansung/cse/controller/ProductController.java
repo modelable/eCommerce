@@ -55,19 +55,25 @@ public class ProductController {
 
 	// DTO(Data Transfer Object) : 계층간 데이터 교환을 위한 객체, 여기서는 클라이언트(Postman)에서 오는 데이터를 수신할 목적으로 사용
     // Product와 ProductDto와의 차이를 비교해서 살펴보기 바람
-
 	@PostMapping
 	public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductDto request) {
 		Product product = productService.createProduct(request.getName(), request.getPrice());
 		return ResponseEntity.status(HttpStatus.CREATED).body(product);
 	}
 
-
-
 	@PutMapping("/{id}")
 	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDto request) {
+		Product product = productService.getProductById(id);
 
+		if (product == null) {
+			throw new NotFoundException(id);
+		}
+		product.setName(request.getName());
+		product.setPrice(request.getPrice());
 
+		productService.updateProduct(product);
+
+		return ResponseEntity.ok(product); // new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")

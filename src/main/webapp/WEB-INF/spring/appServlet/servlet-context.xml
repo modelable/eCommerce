@@ -21,5 +21,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-
+	<!-- tells the spring container which packages to be scanned -->
+	<context:component-scan base-package="kr.ac.hansung.cse.controller"/>
 </beans:beans>
