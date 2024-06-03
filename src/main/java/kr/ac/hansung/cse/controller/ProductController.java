@@ -73,7 +73,7 @@ public class ProductController {
 
 		productService.updateProduct(product);
 
-		return ResponseEntity.ok(product); // new ResponseEntity<>(HttpStatus.OK);
+		return ResponseEntity.ok(product); // new ResponseEntity<Product>(product, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")

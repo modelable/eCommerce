@@ -35,7 +35,7 @@ public class CategoryController {
         if (category == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(category); // new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(category); // new ResponseEntity<Category>(category, HttpStatus.OK);
     }
 
     @PostMapping
